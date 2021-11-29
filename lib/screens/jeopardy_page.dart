@@ -6,10 +6,8 @@ import '../constants.dart';
 import '../screens/components/per_artist.dart';
 import '../screens/components/score_keeper_area.dart';
 import '../screens/components/custom_alert.dart';
-import '../utilities/string_scrambler.dart';
 import '../game_model/scramble_song_title.dart';
 import '../screens/scrambled_game_page.dart';
-import '../screens/first_loading_page.dart';
 import '../utilities/score_keeper.dart';
 
 // late String an1;
@@ -297,7 +295,7 @@ class _JeopardyState extends State<Jeopardy> {
             children: <Widget>[
               Padding(
                 padding: EdgeInsets.fromLTRB(
-                    70.0, screenHeight * 3 / 14, 70.0, screenHeight * 2 / 6),
+                    60.0, screenHeight * 3 / 14, 60.0, screenHeight * 2 / 6),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
@@ -458,12 +456,14 @@ class _JeopardyState extends State<Jeopardy> {
                       0, screenHeight * 3 / 5, 0, screenHeight * 2 / 10),
                   child: Container(
                     height: 50.0,
-                    width: screenWidth / 2,
+                    width: screenWidth * 3 / 2,
                     child: GlowText(
                       sk.isPlayerOneTurn()
                           ? 'PLAYER ONE\'S TURN'
                           : 'PLAYER TWO\'S TURN',
-                      style: kGameTurnTextStyle,
+                      style: sk.isPlayerOneTurn()
+                          ? kGameTurnP1TextStyle
+                          : kGameTurnP2TextStyle,
                       textAlign: TextAlign.center,
                     ),
                   ),
@@ -476,48 +476,20 @@ class _JeopardyState extends State<Jeopardy> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     ScoreKeeperArea(
-                        player: 'PLAYER ONE', playerScore: player1Score),
+                      whichPlayer: true,
+                      player: 'PLAYER ONE',
+                      playerScore: player1Score,
+                      imagePath: 'images/left_score_keeper.png',
+                    ),
                     SizedBox(
                       width: 30.0,
                     ),
                     ScoreKeeperArea(
-                        player: 'PLAYER TWO', playerScore: player2Score),
-                    /*Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: <Widget>[
-                        GlowText(
-                          'PLAYER TWO',
-                          style: kScoreKeeperHeaderTextStyle,
-                          textAlign: TextAlign.center,
-                        ),
-                        Container(
-                          width: 120,
-                          decoration: BoxDecoration(
-                            color: kScoreBoxColor,
-                            borderRadius: BorderRadius.circular(10.0),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Color(0xFF000000).withAlpha(60),
-                                blurRadius: 20.0,
-                                spreadRadius: 0.0,
-                                offset: Offset(
-                                  0.0,
-                                  3.0,
-                                ),
-                              ),
-                            ],
-                          ),
-                          child: Padding(
-                            padding: EdgeInsets.fromLTRB(0, 10.0, 0, 10.0),
-                            child: Text(
-                              player2Score.toString(),
-                              style: kScoreKeeperTextStyle,
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),*/
+                      whichPlayer: false,
+                      player: 'PLAYER TWO',
+                      playerScore: player2Score,
+                      imagePath: 'images/right_score_keeper.png',
+                    ),
                   ],
                 ),
               ),

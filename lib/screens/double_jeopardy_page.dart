@@ -396,12 +396,14 @@ class _DoubleJeopardyState extends State<DoubleJeopardy> {
                       0, screenHeight * 3 / 5, 0, screenHeight * 2 / 10),
                   child: Container(
                     height: 50.0,
-                    width: screenWidth / 2,
+                    width: screenWidth * 3 / 2,
                     child: GlowText(
                       sk.isPlayerOneTurn()
                           ? 'PLAYER ONE\'S TURN'
                           : 'PLAYER TWO\'S TURN',
-                      style: kGameTurnTextStyle,
+                      style: sk.isPlayerOneTurn()
+                          ? kGameTurnP1TextStyle
+                          : kGameTurnP2TextStyle,
                       textAlign: TextAlign.center,
                     ),
                   ),
@@ -414,48 +416,20 @@ class _DoubleJeopardyState extends State<DoubleJeopardy> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     ScoreKeeperArea(
-                        player: 'PLAYER ONE', playerScore: player1Score),
+                      whichPlayer: true,
+                      player: 'PLAYER ONE',
+                      playerScore: player1Score,
+                      imagePath: 'images/left_score_keeper.png',
+                    ),
                     SizedBox(
                       width: 30.0,
                     ),
                     ScoreKeeperArea(
-                        player: 'PLAYER TWO', playerScore: player2Score),
-                    /*Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: <Widget>[
-                        GlowText(
-                          'PLAYER TWO',
-                          style: kScoreKeeperHeaderTextStyle,
-                          textAlign: TextAlign.center,
-                        ),
-                        Container(
-                          width: 120,
-                          decoration: BoxDecoration(
-                            color: kScoreBoxColor,
-                            borderRadius: BorderRadius.circular(10.0),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Color(0xFF000000).withAlpha(60),
-                                blurRadius: 20.0,
-                                spreadRadius: 0.0,
-                                offset: Offset(
-                                  0.0,
-                                  3.0,
-                                ),
-                              ),
-                            ],
-                          ),
-                          child: Padding(
-                            padding: EdgeInsets.fromLTRB(0, 10.0, 0, 10.0),
-                            child: Text(
-                              player2Score.toString(),
-                              style: kScoreKeeperTextStyle,
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),*/
+                      whichPlayer: false,
+                      player: 'PLAYER TWO',
+                      playerScore: player2Score,
+                      imagePath: 'images/right_score_keeper.png',
+                    ),
                   ],
                 ),
               ),

@@ -6,7 +6,7 @@ class TitleScrambler {
   late String title;
   late String scrambled;
 
-  Future<String> Scramble(String title) async {
+  Future<String> scramble(String title) async {
     scrambled = scrambleTitle(title);
     return scrambled;
   }

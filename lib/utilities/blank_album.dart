@@ -15,14 +15,14 @@ class BlankAlbum {
 
     if (temp.length < 2) {
       temp = removeRandomLetters(temp);
-    } else if (temp.length < 4) {
+    } else if (temp.length <= 4) {
       temp = removeRandomLetters(temp);
       temp = removeRandomLetters(temp);
-    } else if (temp.length < 6) {
+    } else if (temp.length > 4 && temp.length <= 6) {
       temp = removeRandomLetters(temp);
       temp = removeRandomLetters(temp);
       temp = removeRandomLetters(temp);
-    } else if (temp.length > 7) {
+    } else if (temp.length > 6) {
       temp = removeRandomLetters(temp);
       temp = removeRandomLetters(temp);
       temp = removeRandomLetters(temp);
@@ -40,26 +40,15 @@ class BlankAlbum {
   }
 
   List<String> removeRandomLetters(List<String> album) {
-    int albumSize = album.length - 1;
-    int rnd = Random().nextInt(albumSize + 1);
-    for (int i = 0; i < album.length; i++) {
-      if (album[i] != "" && album[i] != " ") {
-        album.replaceRange(rnd, rnd + 1, ["_"]);
+    int rnd = Random().nextInt(album.length);
 
-        return album;
-      } else {
-        for (int i = 0; i < album.length; i++) {
-          rnd = Random().nextInt(album.length);
-          if (album[i] != "" && album[i] != " ") {
-            album.replaceRange(rnd, rnd + 1, ["_"]);
+    if (album[rnd] != "" && album[rnd] != " ") {
+      album.replaceRange(rnd, rnd + 1, ["_"]);
 
-            return album;
-          }
-        }
-      }
+      return album;
+    } else {
+      return album;
     }
-
-    return album;
   }
 
   List<String> toArray(String album) {
@@ -73,17 +62,17 @@ class BlankAlbum {
     for (int i = 0; i < newArray.length; i++) {
       if (newArray[i] == "(") {
         temp = newArray.indexOf("(");
-        newArray = newArray.sublist(0, temp - 2);
+        newArray = newArray.sublist(0, temp - 1);
         return newArray;
       }
       if (newArray[i] == "-") {
         temp = newArray.indexOf("-");
-        newArray = newArray.sublist(0, temp - 2);
+        newArray = newArray.sublist(0, temp - 1);
         return newArray;
       }
       if (newArray[i] == "[") {
         temp = newArray.indexOf("[");
-        newArray = newArray.sublist(0, temp - 2);
+        newArray = newArray.sublist(0, temp - 1);
         return newArray;
       }
     }

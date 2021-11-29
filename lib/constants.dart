@@ -6,6 +6,10 @@ const kApi_key = '3adb15db4cmsh86fc7b52f545f07p162563jsn44fafc528771';
 const kSingingTigerHeaderColor = Color(0xFFF7C86B);
 const kGameHeadersColor = Color(0xFFFFE600);
 const kPlayButtonColor = Color(0xFFFFC672);
+const kHowToPlayBackgroundColor = Color(0xFF1A0000);
+const kHowToPlayHeader1TextColor = Color(0xFF961E05); //Color(0xFFD15B03);
+const kHowToPlayHeader2TextColor = Color(0xFFFFE600); //Color(0xFFD15B03);
+const kHowToPlayTextColor = Color(0xFFFFE600);
 const kShadowColor = Color(0xFFFFE600);
 const kHintTextColor = Color(0xFFBBBBBB);
 const kDisabledColor = Color(0xFFC4A466);
@@ -13,8 +17,10 @@ const kEnabledColor = Color(0xFFFFE600);
 const kLoadingBackgroundColor = Color(0xFF1A0000);
 const kLoadingGameTextColor = Color(0xFFD15B03); //Color(0xFF961E05)
 const kGameButtonColor = Color(0xFFFFE600);
-const kGameTurnTextColor = Color(0xFF961E05);
-const kScoreHeaderColor = Color(0xFFFFE600);
+const kGameTurnP1TextColor = Color(0xFF961E05); //player two's turn text color
+const kGameTurnP2TextColor = Colors.blueAccent; //player two's turn text color
+const kScoreHeaderP1Color = Color(0xFF961E05); //Color(0xFFFFE600)
+const kScoreHeaderP2Color = Colors.blueAccent; //Color(0xFFFFE600)
 const kScoreBoxColor = Colors.black;
 const kGameTextColor = Colors.white;
 const kAlertBackgroundColor = Color(0xFF961E05);
@@ -26,7 +32,7 @@ const kWagerPlayerTextColor = Color(0xFFFFE600);
 const kWagerTextColor = Color(0xFFFFE600);
 const kWagerButtonTextColor = Color(0xFF961E05);
 const kWagerButtonColor = Color(0xFFFFE600);
-const kFinalJeopardyHeaderColor = Color(0xFF961E05);
+const kFinalJeopardyHeaderColor = Color(0xFFFFE600); //Color(0xFF961E05);
 
 const kWelcomeTextStyle = TextStyle(
     fontFamily: 'Press Start 2P',
@@ -61,6 +67,28 @@ const kPlayButtonTextStyle = TextStyle(
   color: Color(0xFF1A0000),
   fontWeight: FontWeight.bold,
   letterSpacing: 1.6,
+);
+
+const kHowToPlayHeader1TextStyle = TextStyle(
+  fontFamily: 'Press Start 2P',
+  fontSize: 17.0,
+  color: kHowToPlayHeader1TextColor,
+  letterSpacing: 1.0,
+);
+
+const kHowToPlayHeader2TextStyle = TextStyle(
+  fontFamily: 'Press Start 2P',
+  fontSize: 14.0,
+  color: kHowToPlayHeader2TextColor,
+  letterSpacing: 1.0,
+);
+
+const kHowToPlayTextStyle = TextStyle(
+  fontFamily: 'Press Start 2P',
+  fontSize: 10.0,
+  color: Colors.white,
+  letterSpacing: 1.0,
+  height: 1.5,
 );
 
 const kEnterArtistsTextStyle = TextStyle(
@@ -113,11 +141,20 @@ const kGameButtonTextStyle = TextStyle(
   letterSpacing: 1.6,
 );
 
-const kGameTurnTextStyle = TextStyle(
-    fontFamily: 'Press Start 2P', fontSize: 12.0, color: kGameTurnTextColor);
+const kGameTurnP1TextStyle = TextStyle(
+    fontFamily: 'Press Start 2P', fontSize: 15.0, color: kGameTurnP1TextColor);
 
-const kScoreKeeperHeaderTextStyle =
-    TextStyle(fontFamily: 'Roboto', fontSize: 15.0, color: kScoreHeaderColor);
+const kGameTurnP2TextStyle = TextStyle(
+    fontFamily: 'Press Start 2P', fontSize: 15.0, color: kGameTurnP2TextColor);
+
+/*const kScoreKeeperHeaderTextStyle =
+    TextStyle(fontFamily: 'Roboto', fontSize: 15.0, color: kScoreHeaderColor);*/ //original score keeper header version
+
+const kScoreKeeperHeaderP1TextStyle =
+    TextStyle(fontFamily: 'Roboto', fontSize: 15.0, color: kScoreHeaderP1Color);
+
+const kScoreKeeperHeaderP2TextStyle =
+    TextStyle(fontFamily: 'Roboto', fontSize: 15.0, color: kScoreHeaderP2Color);
 
 const kScoreKeeperTextStyle = TextStyle(
   fontFamily: 'Press Start 2P',
@@ -181,3 +218,6 @@ const kRestartButtonTextStyle = TextStyle(
   fontWeight: FontWeight.bold,
   letterSpacing: 1.6,
 );
+
+const kFinalJeopardyHeader2TextStyle = TextStyle(
+    fontFamily: 'Press Start 2P', fontSize: 10.0, color: kGameHeadersColor);

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:singing_tiger_test/game_model/scramble_song_title.dart';
 import 'package:singing_tiger_test/game_model/album_song_game.dart';
 import 'package:singing_tiger_test/utilities/album_song.dart';
 import 'package:singing_tiger_test/utilities/blank_album.dart';
@@ -45,8 +44,11 @@ class _ThirdLoadingPageState extends State<ThirdLoadingPage> {
       required String artistName3}) async {
     try {
       AlbumSongGame asg1 = await getAlbumSongGameComponent(artistName1);
+      print('asg1\'s album title is = ${asg1.albumName}');
       AlbumSongGame asg2 = await getAlbumSongGameComponent(artistName2);
+      print('asg1\'s album title is = ${asg2.albumName}');
       AlbumSongGame asg3 = await getAlbumSongGameComponent(artistName3);
+      print('asg1\'s album title is = ${asg3.albumName}');
 
       Navigator.of(context).push(MaterialPageRoute(
           builder: (context) => WagerPage(

@@ -1,8 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'artist_id.dart';
 import '../constants.dart';
-import 'song_id.dart';
 
 class Album {
 
@@ -15,11 +13,16 @@ class Album {
     var albumData = json.decode(soundURLResponse.body);
 
     if (soundURLResponse.statusCode == 200) {
-      String albumName = albumData['response']['song']['album']['name'];
+      String albumName;
+      try {
+        albumName = albumData['response']['song']['album']['name'];
+      } catch (e) {
+        albumName = 'singles';
+      }
       print("Album is: $albumName");
       return albumName;
     } else {
-      return 'Tite';
+      return ': D';
     }
   }
 

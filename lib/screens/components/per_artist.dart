@@ -34,12 +34,15 @@ class PerArtist extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
         Container(
-          height: 40.0,
+          height: 60.0,
           width: sw / 5,
-          child: GlowText(
-            an.toUpperCase(), //an
-            style: kGameArtistsNameHeaderTextStyle,
-            textAlign: TextAlign.center,
+          child: Align(
+            alignment: Alignment.bottomCenter,
+            child: GlowText(
+              an.toUpperCase(), //an
+              style: kGameArtistsNameHeaderTextStyle,
+              textAlign: TextAlign.center,
+            ),
           ),
         ),
         GameButtons(

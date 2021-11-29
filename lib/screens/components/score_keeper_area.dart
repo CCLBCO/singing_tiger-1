@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_glow/flutter_glow.dart';
 import 'package:singing_tiger_test/constants.dart';
-import 'game_buttons.dart';
 
 class ScoreKeeperArea extends StatelessWidget {
-  ScoreKeeperArea({required this.player, required this.playerScore});
+  ScoreKeeperArea(
+      {required this.imagePath,
+      required this.whichPlayer, //true for P1, false for P2
+      required this.player,
+      required this.playerScore});
 
+  final bool whichPlayer;
+  final String imagePath;
   final String player;
   final int playerScore;
 
@@ -16,33 +21,27 @@ class ScoreKeeperArea extends StatelessWidget {
       children: <Widget>[
         GlowText(
           player,
-          style: kScoreKeeperHeaderTextStyle,
+          style: whichPlayer? kScoreKeeperHeaderP1TextStyle : kScoreKeeperHeaderP2TextStyle,
           textAlign: TextAlign.center,
         ),
         Container(
           width: 120,
-          decoration: BoxDecoration(
-            color: kScoreBoxColor,
-            borderRadius: BorderRadius.circular(10.0),
-            boxShadow: [
-              BoxShadow(
-                color: Color(0xFF000000).withAlpha(60),
-                blurRadius: 20.0,
-                spreadRadius: 0.0,
-                offset: Offset(
-                  0.0,
-                  3.0,
+          child: Stack(
+            children: <Widget>[
+              Image(
+                image: AssetImage(imagePath),
+              ),
+              Center(
+                child: Padding(
+                  padding: EdgeInsets.fromLTRB(0, 15.0, 0, 10.0),
+                  child: GlowText(
+                    playerScore.toString(),
+                    style: kScoreKeeperTextStyle,
+                    textAlign: TextAlign.center,
+                  ),
                 ),
               ),
             ],
-          ),
-          child: Padding(
-            padding: EdgeInsets.fromLTRB(0, 10.0, 0, 10.0),
-            child: Text(
-              playerScore.toString(),
-              style: kScoreKeeperTextStyle,
-              textAlign: TextAlign.center,
-            ),
           ),
         ),
       ],

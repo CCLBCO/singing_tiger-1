@@ -1,22 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_glow/flutter_glow.dart';
 import '../constants.dart';
+import 'guide_page.dart';
 import 'input_page.dart';
 
 class StartPage extends StatelessWidget {
   const StartPage({Key? key}) : super(key: key);
 
-  void getRandomSongLyrics() async {
-    //GetLyrics gl = new GetLyrics();
-    //GetArtistSongs gas = new GetArtistSongs();
-
-    //gl.getLyrics(artistName: "Taylor Swift");
-  }
-
   @override
   Widget build(BuildContext context) {
-    getRandomSongLyrics();
-
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
@@ -60,20 +52,42 @@ class StartPage extends StatelessWidget {
               Align(
                 alignment: Alignment.bottomCenter,
                 child: Container(
-                  width: 120,
+                  width: 500.0,
                   child: Padding(
-                    padding: EdgeInsets.fromLTRB(0, 0, 0, 120.0),
-                    child: GlowButton(
-                        color: kPlayButtonColor,
-                        child: Text(
-                          "PLAY",
-                          style: kPlayButtonTextStyle,
+                    padding: EdgeInsets.fromLTRB(0, 0, 0, 100.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: <Widget>[
+                        GlowButton(
+                          color: kPlayButtonColor,
+                          width: 120.0,
+                          child: Text(
+                            "PLAY",
+                            style: kPlayButtonTextStyle,
+                          ),
+                          onPressed: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => InputPage()));
+                          },
                         ),
-                        onPressed: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => InputPage()));
-                          //builder: (context) => GamePage()));
-                        }),
+                        SizedBox(
+                          height: 15.0,
+                        ),
+                        GlowButton(
+                          color: kPlayButtonColor,
+                          width: 180.0,
+                          child: Text(
+                            "HOW TO PLAY",
+                            style: kPlayButtonTextStyle,
+                          ),
+                          onPressed: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => GuidePage()));
+                            //builder: (context) => GamePage()));
+                          },
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),

@@ -108,7 +108,7 @@ class _FirstLoadingPageState extends State<FirstLoadingPage> {
   Future<ScrambledSongGame> getScrambledGameComponent(String an) async {
     String correctTitle = await ts.getSongTitle(an);
     print('correctTitle = $correctTitle');
-    String scrambledTitle = await ts.Scramble(correctTitle);
+    String scrambledTitle = await ts.scramble(correctTitle);
     print('scrambledTitle = $scrambledTitle');
 
     return ScrambledSongGame(

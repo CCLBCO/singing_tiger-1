@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_glow/flutter_glow.dart';
 import 'package:singing_tiger_test/game_model/scramble_song_title.dart';
 import 'package:singing_tiger_test/screens/components/loading_screen.dart';
 import 'package:singing_tiger_test/utilities/score_keeper.dart';
 import 'package:singing_tiger_test/utilities/string_scrambler.dart';
-import '../constants.dart';
 import 'double_jeopardy_page.dart';
 
 class SecondLoadingPage extends StatefulWidget {
@@ -77,7 +75,7 @@ class _SecondLoadingPageState extends State<SecondLoadingPage> {
   Future<ScrambledSongGame> getScrambledGameComponent(String an) async {
     String correctTitle = await ts.getSongTitle(an);
     print('correctTitle = $correctTitle');
-    String scrambledTitle = await ts.Scramble(correctTitle);
+    String scrambledTitle = await ts.scramble(correctTitle);
     print('scrambledTitle = $scrambledTitle');
 
     return ScrambledSongGame(

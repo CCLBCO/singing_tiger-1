@@ -13,7 +13,10 @@ class CustomAlert extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       backgroundColor: kAlertBackgroundColor,
-      title: GlowText(message, style: kAlertMessageTextStyle),
+      title: GlowText(
+        message,
+        style: kAlertMessageTextStyle,
+      ),
       content: SingleChildScrollView(
         child: GlowText(
           subMessage,

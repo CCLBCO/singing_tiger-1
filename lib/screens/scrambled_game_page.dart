@@ -98,7 +98,6 @@ class _ScrambledGamePageState extends State<ScrambledGamePage> {
   @override
   Widget build(BuildContext pageContext) {
     double screenHeight = MediaQuery.of(pageContext).size.height;
-    double screenWidth = MediaQuery.of(pageContext).size.width;
     String correctAnswer = widget.ssg.songTitle;
     int gameScore = widget.score;
 

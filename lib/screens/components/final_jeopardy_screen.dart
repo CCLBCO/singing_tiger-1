@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_glow/flutter_glow.dart';
 import 'package:singing_tiger_test/constants.dart';
@@ -30,7 +29,7 @@ class FinalJeopardyScreen extends StatelessWidget {
         ),
         GlowText(
           'FILL IN THE SONG\'S ALBUM NAME',
-          style: kEnterArtistsTextStyle,
+          style: kFinalJeopardyHeader2TextStyle,
           textAlign: TextAlign.center,
         ),
         SizedBox(

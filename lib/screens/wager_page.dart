@@ -5,7 +5,7 @@ import '../game_model/album_song_game.dart';
 import '../utilities/score_keeper.dart';
 import 'components/wager_slider.dart';
 import '../constants.dart';
-import 'final_jeopardy_page_one.dart';
+import 'p1_final_jeopardy_page.dart';
 
 class WagerPage extends StatefulWidget {
   WagerPage(
@@ -36,8 +36,8 @@ class _WagerPageState extends State<WagerPage> {
     playerOneScore = widget.scoreKeeper.getPlayerOneScore();
     playerTwoScore = widget.scoreKeeper.getPlayerTwoScore();
     min = 0;
-    maxForPlayer1 = playerOneScore.abs() * 2;
-    maxForPlayer2 = playerTwoScore.abs() * 2;
+    maxForPlayer1 = ((playerOneScore.abs() + 100) * 1.5).toInt() + 150;
+    maxForPlayer2 = ((playerTwoScore.abs() + 100) * 1.5).toInt() + 150;
 
     void sendToFinalJeopardy(
         {required int playerOneWager,
@@ -46,7 +46,7 @@ class _WagerPageState extends State<WagerPage> {
         required AlbumSongGame asg2,
         required AlbumSongGame asg3}) {
       List<AlbumSongGame> listOfAlbumGames = [asg1, asg2, asg3];
-      //picks a random album song game object that player one will play
+      /*//picks a random album song game object that player one will play
       int rnd1 = Random().nextInt(listOfAlbumGames.length);
       AlbumSongGame asgForPlayerOne = listOfAlbumGames[rnd1];
       //removes it so that it will not be taken by player two
@@ -56,15 +56,21 @@ class _WagerPageState extends State<WagerPage> {
       //picks a random album song game object that player two will play
       int rnd2 = Random().nextInt(listOfAlbumGames.length);
       AlbumSongGame asgForPlayerTwo = listOfAlbumGames[rnd2];
+      print('the album name for player two is: ${asgForPlayerTwo.albumName}');*/
+      AlbumSongGame asgForPlayerOne = listOfAlbumGames[0];
+      AlbumSongGame asgForPlayerTwo = listOfAlbumGames[2];
+      print('the album name for player one is: ${asgForPlayerOne.albumName}');
       print('the album name for player two is: ${asgForPlayerTwo.albumName}');
-
-      Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => FinalJeopardy(
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => P1FinalJeopardy(
               playerOneWager: playerOneWager,
               playerTwoWager: playerTwoWager,
               asg1: asgForPlayerOne,
               asg2: asgForPlayerTwo,
-              scoreKeeper: widget.scoreKeeper)));
+              scoreKeeper: widget.scoreKeeper),
+        ),
+      );
     }
 
     return Container(
@@ -127,8 +133,8 @@ class _WagerPageState extends State<WagerPage> {
                         playerOneWager: player1Wager,
                         playerTwoWager: player2Wager,
                         asg1: widget.asg1,
-                        asg2: widget.asg1,
-                        asg3: widget.asg1);
+                        asg2: widget.asg2,
+                        asg3: widget.asg3);
                   });
                 },
               ),
