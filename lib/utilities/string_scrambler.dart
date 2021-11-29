@@ -2,8 +2,7 @@ import 'package:singing_tiger_test/utilities/song_title.dart';
 
 import 'song_title.dart';
 
-class TitleScrambler{
-
+class TitleScrambler {
   late String title;
   late String scrambled;
 
@@ -12,19 +11,20 @@ class TitleScrambler{
     return scrambled;
   }
 
-  Future<String> getSongTitle(String artistName) async{
+  Future<String> getSongTitle(String artistName) async {
     title = await Song().getSongTitle(artistName);
     title = title.toUpperCase().split(" (")[0];
+    title = cleanApostrophe(title);
     print(title);
     return title;
   }
 
   String scrambleTitle(String sT) {
     String temp;
-    List <String> toScramble = sT.split(" ");
+    List<String> toScramble = sT.split(" ");
     List<String> newScramble = [];
 
-    for (int i = 0; i < toScramble.length; i++){
+    for (int i = 0; i < toScramble.length; i++) {
       temp = wordScramble(toScramble[i]);
       newScramble.add(temp);
     }
@@ -40,11 +40,10 @@ class TitleScrambler{
     print(scrambledWord);
 
     return scrambledWord;
-
   }
 
-  String wordScramble(String word){
-    List <String> wordScramble = word.split("");
+  String wordScramble(String word) {
+    List<String> wordScramble = word.split("");
     wordScramble.shuffle();
     StringBuffer sb = new StringBuffer();
 
@@ -56,6 +55,10 @@ class TitleScrambler{
     return scrambledWord;
   }
 
+  String cleanApostrophe(String title) {
+    String scrambledWord = title;
+    scrambledWord = scrambledWord.replaceAll('’', "'");
 
-
+    return scrambledWord;
+  }
 }

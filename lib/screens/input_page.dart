@@ -2,9 +2,11 @@ import 'dart:core';
 import 'package:flutter/material.dart';
 import 'package:flutter_glow/flutter_glow.dart';
 import '../constants.dart';
+import '../screens/components/input_boxes.dart';
+import '../screens/first_loading_page.dart';
 import '../utilities/string_scrambler.dart';
 import '../game_model/scramble_song_title.dart';
-import 'game_page.dart';
+import 'jeopardy_page.dart';
 import 'dart:async';
 
 class InputPage extends StatefulWidget {
@@ -25,10 +27,12 @@ class _InputPageState extends State<InputPage> {
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
+    double screenWidth = MediaQuery.of(context).size.width;
 
     TitleScrambler ts = TitleScrambler();
 
-    Future<ScrambledSongGame> getScrambledGameComponent(String an) async {
+    //gets the game components such as the title itself and its scrambled version
+    /*Future<ScrambledSongGame> getScrambledGameComponent(String an) async {
       String correctTitle = await ts.getSongTitle(an);
       print('correctTitle = $correctTitle');
       String scrambledTitle = await ts.Scramble(correctTitle);
@@ -36,29 +40,28 @@ class _InputPageState extends State<InputPage> {
 
       return ScrambledSongGame(
           scrambledSongTitle: scrambledTitle, songTitle: correctTitle);
+    }*/
+    void sendToLoadingPage() async {
+      try {
+
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => FirstLoadingPage(
+                  artistName1: artistName1,
+                  artistName2: artistName2,
+                  artistName3: artistName3
+                )));
+      } catch (e) {
+        print(e);
+        //TODO: make alert dialog that says 'we can't find one of the artists you named, please enter a new one'
+      }
     }
 
-    void sendToGamePage() async {
-      ScrambledSongGame ssg1 = await getScrambledGameComponent(artistName1);
-      ScrambledSongGame ssg2 = await getScrambledGameComponent(artistName2);
-      ScrambledSongGame ssg3 = await getScrambledGameComponent(artistName3);
-
-      Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => GamePage(
-                artistName1: artistName1,
-                artistName2: artistName2,
-                artistName3: artistName3,
-                ssg1: ssg1,
-                ssg2: ssg2,
-                ssg3: ssg3,
-              )));
-    }
 
     if (artistName1.isNotEmpty &&
         artistName2.isNotEmpty &&
         artistName3.isNotEmpty) {
       button = () {
-        sendToGamePage();
+        sendToLoadingPage();
       };
     }
 
@@ -79,7 +82,10 @@ class _InputPageState extends State<InputPage> {
                 alignment: Alignment.topCenter,
                 child: Padding(
                   padding: EdgeInsets.fromLTRB(
-                      70.0, screenHeight * 3 / 11, 70.0, screenHeight * 2 / 6),
+                      screenWidth / 5,
+                      screenHeight * 3 / 11,
+                      screenWidth / 5,
+                      screenHeight * 2 / 6),
                   //padding: EdgeInsets.all(10.0),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -87,87 +93,25 @@ class _InputPageState extends State<InputPage> {
                       GlowText(
                         "ENTER YOUR ARTISTS",
                         style: kEnterArtistsTextStyle,
+                        textAlign: TextAlign.center,
                       ),
-                      Material(
-                        elevation: 5.0,
-                        shadowColor: Color(0xFFFFE600),
-                        borderRadius: BorderRadius.circular(15),
-                        borderOnForeground: true,
-                        child: TextField(
-                          textAlign: TextAlign.center,
-                          decoration: InputDecoration(
-                            alignLabelWithHint: true,
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15),
-                              borderSide: BorderSide(color: Color(0xFFFFE600)),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15),
-                              borderSide: BorderSide(color: Color(0xFFFFE600)),
-                            ),
-                            hintText: 'ARTIST 1',
-                            hintStyle: kHintTextStyle,
-                            //fillColor: Colors.white,
-                            filled: false,
-                          ),
-                          onChanged: (inputtedArtist1) {
-                            artistName1 = inputtedArtist1;
-                          },
-                        ),
+                      InputBoxes(
+                        hintText: 'ARTIST 1',
+                        function: (inputtedArtist1) {
+                          artistName1 = inputtedArtist1;
+                        },
                       ),
-                      Material(
-                        elevation: 5.0,
-                        shadowColor: Color(0xFFFFE600),
-                        borderRadius: BorderRadius.circular(15),
-                        borderOnForeground: true,
-                        child: TextField(
-                          textAlign: TextAlign.center,
-                          decoration: InputDecoration(
-                            alignLabelWithHint: true,
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15),
-                              borderSide: BorderSide(color: Color(0xFFFFE600)),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15),
-                              borderSide: BorderSide(color: Color(0xFFFFE600)),
-                            ),
-                            hintText: 'ARTIST 2',
-                            hintStyle: kHintTextStyle,
-                            //fillColor: Colors.white,
-                            filled: false,
-                          ),
-                          onChanged: (inputtedArtist2) {
-                            artistName2 = inputtedArtist2;
-                          },
-                        ),
+                      InputBoxes(
+                        hintText: 'ARTIST 2',
+                        function: (inputtedArtist2) {
+                          artistName2 = inputtedArtist2;
+                        },
                       ),
-                      Material(
-                        elevation: 5.0,
-                        shadowColor: Color(0xFFFFE600),
-                        borderRadius: BorderRadius.circular(15),
-                        borderOnForeground: true,
-                        child: TextField(
-                          textAlign: TextAlign.center,
-                          decoration: InputDecoration(
-                            alignLabelWithHint: true,
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15),
-                              borderSide: BorderSide(color: Color(0xFFFFE600)),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15),
-                              borderSide: BorderSide(color: Color(0xFFFFE600)),
-                            ),
-                            hintText: 'ARTIST 3',
-                            hintStyle: kHintTextStyle,
-                            //fillColor: Colors.white,
-                            filled: false,
-                          ),
-                          onChanged: (inputtedArtist3) {
-                            artistName3 = inputtedArtist3;
-                          },
-                        ),
+                      InputBoxes(
+                        hintText: 'ARTIST 3',
+                        function: (inputtedArtist3) {
+                          artistName3 = inputtedArtist3;
+                        },
                       ),
                     ],
                   ),
@@ -201,9 +145,9 @@ class _InputPageState extends State<InputPage> {
                           style: kNextButtonTextStyle,
                         ),
                         onPressed: button
-                      // Navigator.of(context).push(MaterialPageRoute(
-                      //     builder: (context) => InputPage()));
-                    ),
+                        // Navigator.of(context).push(MaterialPageRoute(
+                        //     builder: (context) => InputPage()));
+                        ),
                   ),
                 ),
               ),

@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_glow/flutter_glow.dart';
-//import '../get_artist_songs.dart';
-//import '../get_lyrics.dart';
 import '../constants.dart';
 import 'input_page.dart';
-import 'game_page.dart';
 
 class StartPage extends StatelessWidget {
   const StartPage({Key? key}) : super(key: key);

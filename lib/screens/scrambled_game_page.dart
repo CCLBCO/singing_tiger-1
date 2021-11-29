@@ -3,27 +3,104 @@ import 'package:flutter_glow/flutter_glow.dart';
 import '../constants.dart';
 import '../game_model/scramble_song_title.dart';
 import '../utilities/score_keeper.dart';
-
+import 'components/custom_alert.dart';
+import 'components/input_boxes.dart';
 
 class ScrambledGamePage extends StatefulWidget {
-  ScrambledGamePage({required this.ssg, required this.sk});
+  ScrambledGamePage({required this.ssg, required this.sk, required this.score});
 
   final ScrambledSongGame ssg;
   final ScoreKeeper sk;
+  final int score;
 
   @override
   _ScrambledGamePageState createState() => _ScrambledGamePageState();
 }
 
 class _ScrambledGamePageState extends State<ScrambledGamePage> {
-  String? scrambledTitleAnswer;
-  int ssgScore = 100;
+  String scrambledTitleAnswer = '';
+  String msg = '';
+  String scoreMsg = '';
+
+  void checkAnswer(
+      {required String usersAnswer,
+      required String correctAnswer,
+      required int gameScore,
+      required BuildContext con}) {
+    if (widget.sk.isPlayerOneTurn()) {
+      if (usersAnswer.toUpperCase().trim() ==
+          correctAnswer.toUpperCase().trim()) {
+        widget.sk.addPlayerOneScore(gameScore);
+        print("P1 WINS! - player one score = " +
+            widget.sk.getPlayerOneScore().toString());
+        msg = 'PLAYER ONE IS CORRECT!';
+        scoreMsg = 'YOU GET $gameScore';
+      } else {
+        //when P1 is wrong
+        widget.sk.subtractPlayerOneScore(gameScore);
+        msg = 'PLAYER ONE IS WRONG!';
+        scoreMsg = 'YOU LOSE $gameScore';
+      }
+      widget.sk.nowPlayerTwoTurn();
+    } else {
+      if (usersAnswer.toUpperCase().trim() ==
+          correctAnswer.toUpperCase().trim()) {
+        widget.sk.addPlayerTwoScore(gameScore);
+        print("P2 WINS! - player two score = " +
+            widget.sk.getPlayerTwoScore().toString());
+        msg = 'PLAYER TWO IS CORRECT!';
+        scoreMsg = 'YOU GET $gameScore';
+      } else {
+        //when P2 is wrong
+        widget.sk.subtractPlayerTwoScore(gameScore);
+        msg = 'PLAYER TWO IS WRONG!';
+        scoreMsg = 'YOU LOSE $gameScore';
+      }
+      widget.sk.nowPlayerOneTurn();
+    }
+    _showMyDialog(con);
+  }
+
+  //alert dialog layout when they submit their answers
+  Future<void> _showMyDialog(BuildContext cont) async {
+    return showDialog<void>(
+      context: cont,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext alertContext) {
+        return CustomAlert(
+          message: msg,
+          subMessage: scoreMsg,
+          actions: <Widget>[
+            TextButton(
+              child: GlowText(
+                'CONTINUE',
+                style: TextStyle(
+                  color: Color(0xFFFFE600),
+                  fontFamily: 'Press Start 2P',
+                  fontSize: 15,
+                ),
+              ),
+              onPressed: () {
+                setState(() {
+                  //pops the screen off
+                  Navigator.of(cont).pop();
+                  //pops the alert dialog off
+                  Navigator.pop(alertContext);
+                });
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
-  Widget build(BuildContext context) {
-    double screenHeight = MediaQuery.of(context).size.height;
-    double screenWidth = MediaQuery.of(context).size.width;
+  Widget build(BuildContext pageContext) {
+    double screenHeight = MediaQuery.of(pageContext).size.height;
+    double screenWidth = MediaQuery.of(pageContext).size.width;
     String correctAnswer = widget.ssg.songTitle;
+    int gameScore = widget.score;
 
     return Container(
       decoration: BoxDecoration(
@@ -56,7 +133,13 @@ class _ScrambledGamePageState extends State<ScrambledGamePage> {
                         style: kGameTextStyle,
                         textAlign: TextAlign.center,
                       ),
-                      Material(
+                      InputBoxes(
+                        hintText: 'ANSWER',
+                        function: (answer) {
+                          scrambledTitleAnswer = answer.toUpperCase().trim();
+                        },
+                      ),
+                      /*Material(
                         elevation: 5.0,
                         shadowColor: Color(0xFFFFE600),
                         borderRadius: BorderRadius.circular(15),
@@ -79,10 +162,10 @@ class _ScrambledGamePageState extends State<ScrambledGamePage> {
                             filled: false,
                           ),
                           onChanged: (answer) {
-                            scrambledTitleAnswer = answer.toUpperCase();
+                            scrambledTitleAnswer = answer.toUpperCase().trim();
                           },
                         ),
-                      ),
+                      ),*/
                     ],
                   ),
                 ),
@@ -115,24 +198,20 @@ class _ScrambledGamePageState extends State<ScrambledGamePage> {
                       onPressed: () {
                         setState(
                           () {
-                            if (scrambledTitleAnswer!.toUpperCase() ==
-                                correctAnswer) {
-                              print("scrambledTitleAnswer = " +
-                                  scrambledTitleAnswer!);
-                              if (widget.sk.isPlayerOneTurn()) {
-                                widget.sk.addPlayerOneScore(ssgScore);
-                                widget.sk.nowPlayerTwoTurn();
-                                print("player one score = " +
-                                    widget.sk.getPlayerOneScore().toString());
+                            print("user's answer is: $scrambledTitleAnswer");
+                            print("correct answer is: $correctAnswer");
+                            print("game score is: $gameScore");
+                            print("player one's turn?");
+                            print(widget.sk.isPlayerOneTurn());
+                            print("player two's turn?");
+                            print(widget.sk.isPlayerTwoTurn());
 
-                              } else {
-                                widget.sk.addPlayerTwoScore(ssgScore);
-                                widget.sk.nowPlayerOneTurn();
-                                print("player two score = " +
-                                    widget.sk.getPlayerTwoScore().toString());
-                              }
-                            }
-                            Navigator.of(context).pop();
+                            //Navigator.of(pageContext).pop();
+                            checkAnswer(
+                                usersAnswer: scrambledTitleAnswer,
+                                correctAnswer: correctAnswer,
+                                gameScore: gameScore,
+                                con: pageContext);
                           },
                         );
                       },

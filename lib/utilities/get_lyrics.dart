@@ -41,10 +41,10 @@ class GetLyrics {
 
       do {
         var document = parser.parse(lyricsResponse.body);
-        lyricsHtml = document.getElementsByClassName('lyrics');
-        print(lyricsHtml);
+        lyricsHtml = document.getElementsByClassName("lyrics");
+        print("lyricssHtml = " + lyricsHtml);
         wholeLyrics = lyricsHtml[0].text;
-        print(wholeLyrics.length);
+        print("wholeLyrics = " + wholeLyrics.length.toString());
       } while (lyricsHtml.isEmpty == true);
 
       bool hasChorus = false;
