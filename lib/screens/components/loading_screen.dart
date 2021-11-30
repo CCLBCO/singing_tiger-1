@@ -21,6 +21,9 @@ class LoadingScreen extends StatelessWidget {
                 width: 120.0,
                 height: 120.0,
               ),
+              SizedBox(
+                height: 10.0,
+              ),
               GlowText(
                 'LOADING GAME...',
                 style: kLoadingGameTextStyle,

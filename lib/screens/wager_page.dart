@@ -44,23 +44,23 @@ class _WagerPageState extends State<WagerPage> {
         required int playerTwoWager,
         required AlbumSongGame asg1,
         required AlbumSongGame asg2,
-        required AlbumSongGame asg3}) {
+        required AlbumSongGame asg3})
+    {
       List<AlbumSongGame> listOfAlbumGames = [asg1, asg2, asg3];
-      /*//picks a random album song game object that player one will play
-      int rnd1 = Random().nextInt(listOfAlbumGames.length);
+      //picks a random album song game object that player one will play
+      int rnd1 = Random().nextInt(3);
       AlbumSongGame asgForPlayerOne = listOfAlbumGames[rnd1];
       //removes it so that it will not be taken by player two
       listOfAlbumGames.removeAt(rnd1);
       print('the album name for player one is: ${asgForPlayerOne.albumName}');
 
       //picks a random album song game object that player two will play
-      int rnd2 = Random().nextInt(listOfAlbumGames.length);
+      int rnd2 = Random().nextInt(2);
       AlbumSongGame asgForPlayerTwo = listOfAlbumGames[rnd2];
-      print('the album name for player two is: ${asgForPlayerTwo.albumName}');*/
-      AlbumSongGame asgForPlayerOne = listOfAlbumGames[0];
-      AlbumSongGame asgForPlayerTwo = listOfAlbumGames[2];
-      print('the album name for player one is: ${asgForPlayerOne.albumName}');
       print('the album name for player two is: ${asgForPlayerTwo.albumName}');
+
+      /*AlbumSongGame asgForPlayerOne = listOfAlbumGames[0];
+      AlbumSongGame asgForPlayerTwo = listOfAlbumGames[2];*/
       Navigator.of(context).push(
         MaterialPageRoute(
           builder: (context) => P1FinalJeopardy(
@@ -138,73 +138,6 @@ class _WagerPageState extends State<WagerPage> {
                   });
                 },
               ),
-              /*GestureDetector(
-                child: Container(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      GlowText(
-                        'PLAYER TWO',
-                        style: kWagerPlayerTextStyle,
-                      ),
-                      SizedBox(
-                        height: 10.0,
-                      ),
-                      GlowText(
-                        'WAGER',
-                        style: kWagerTextStyle,
-                      ),
-                      SizedBox(
-                        height: 10.0,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.baseline,
-                        textBaseline: TextBaseline.alphabetic,
-                        children: <Widget>[
-                          GlowText(
-                            player2Wager.toString(),
-                            style: kWagerTextStyle,
-                          ),
-                          GlowText(
-                            'pts',
-                            style: kWagerTextStyle,
-                          ),
-                        ],
-                      ),
-                      SliderTheme(
-                        data: SliderTheme.of(context).copyWith(
-                          trackHeight: 2.0,
-                          inactiveTrackColor: Color(0xFFD26201),
-                          activeTrackColor: Color(0xFFF2AE00),
-                          thumbColor: kWagerTextColor,
-                          overlayColor: Color(0x50C73003),
-                          thumbShape:
-                              RoundSliderThumbShape(enabledThumbRadius: 15.0),
-                          overlayShape:
-                              RoundSliderOverlayShape(overlayRadius: 30.0),
-                        ),
-                        child: Slider(
-                          value: player1Wager.toDouble(),
-                          min: min.toDouble(),
-                          max: maxForPlayer2.toDouble(),
-                          onChanged: (double newValue) {
-                            setState(() {
-                              player2Wager = newValue.round();
-                            });
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                  margin: EdgeInsets.all(15.0),
-                  padding: EdgeInsets.all(30.0),
-                  decoration: BoxDecoration(
-                    color: kWagerCardColor,
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                ),
-              ),*/
             ],
           ),
         ),

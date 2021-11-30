@@ -15,6 +15,7 @@ class EndPage extends StatefulWidget {
 }
 
 class _EndPageState extends State<EndPage> {
+
   String checkWhoWon() {
     ScoreKeeper sk = widget.scoreKeeper;
 
@@ -61,7 +62,7 @@ class _EndPageState extends State<EndPage> {
                 alignment: Alignment.center,
                 child: Container(
                   child: Padding(
-                    padding: const EdgeInsets.fromLTRB(30.0, 146.0, 30.0, 0),
+                    padding: const EdgeInsets.fromLTRB(15.0, 115.0, 15.0, 0),
                     child: Image.asset("images/singing_tiger_mascot.GIF"),
                   ),
                 ),

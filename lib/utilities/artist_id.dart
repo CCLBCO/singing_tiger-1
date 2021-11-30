@@ -21,7 +21,7 @@ Future<int> getArtistID({required String artistName}) async {
   if (searchResponse.statusCode == 200) {
     var  searchData = json.decode(searchResponse.body);
     int artistID = searchData['response']['hits'][0]['result']['primary_artist']['id'];
-    // print("artistID is $artistID");
+
     return artistID;
   } else {
     return 0;

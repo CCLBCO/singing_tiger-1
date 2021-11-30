@@ -78,9 +78,10 @@ const kHowToPlayHeader1TextStyle = TextStyle(
 
 const kHowToPlayHeader2TextStyle = TextStyle(
   fontFamily: 'Press Start 2P',
-  fontSize: 14.0,
+  fontSize: 20.0,
   color: kHowToPlayHeader2TextColor,
   letterSpacing: 1.0,
+  height: 1.4,
 );
 
 const kHowToPlayTextStyle = TextStyle(
@@ -92,10 +93,16 @@ const kHowToPlayTextStyle = TextStyle(
 );
 
 const kEnterArtistsTextStyle = TextStyle(
-    fontFamily: 'Press Start 2P', fontSize: 15.0, color: kGameHeadersColor);
+    fontFamily: 'Press Start 2P',
+    fontSize: 18.0,
+    color: kGameHeadersColor,
+    height: 1.2);
 
 const kHintTextStyle = TextStyle(
-    fontFamily: 'Press Start 2P', fontSize: 10.0, color: kHintTextColor);
+    fontFamily: 'Press Start 2P',
+    fontSize: 12.0,
+    color: kHintTextColor,
+    letterSpacing: 3.0);
 
 final ButtonStyle kDisabledNextButtonStyle = ElevatedButton.styleFrom(
   onPrimary: Colors.black87,

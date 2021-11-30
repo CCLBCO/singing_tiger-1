@@ -31,10 +31,13 @@ class _ThirdLoadingPageState extends State<ThirdLoadingPage> {
   @override
   void initState() {
     super.initState();
+
+    // initializing the artist names that will be processed in the sendToWagerPage function
     String an1 = widget.artistName1;
     String an2 = widget.artistName2;
     String an3 = widget.artistName3;
 
+    //will process the artist names into their following game components
     sendToWagerPage(artistName1: an1, artistName2: an2, artistName3: an3);
   }
 
@@ -42,13 +45,11 @@ class _ThirdLoadingPageState extends State<ThirdLoadingPage> {
       {required String artistName1,
       required String artistName2,
       required String artistName3}) async {
-    try {
+
+      // gets the following album song game component for each artist
       AlbumSongGame asg1 = await getAlbumSongGameComponent(artistName1);
-      print('asg1\'s album title is = ${asg1.albumName}');
       AlbumSongGame asg2 = await getAlbumSongGameComponent(artistName2);
-      print('asg1\'s album title is = ${asg2.albumName}');
       AlbumSongGame asg3 = await getAlbumSongGameComponent(artistName3);
-      print('asg1\'s album title is = ${asg3.albumName}');
 
       Navigator.of(context).push(MaterialPageRoute(
           builder: (context) => WagerPage(
@@ -57,16 +58,12 @@ class _ThirdLoadingPageState extends State<ThirdLoadingPage> {
                 asg2: asg2,
                 asg3: asg3,
               )));
-    } catch (e) {
-      print(e);
-      //TODO: make alert dialog that says 'we can't find one of the artists you named, please enter a new one'
-    }
+
   }
 
   Future<AlbumSongGame> getAlbumSongGameComponent(String aN) async {
     //getting random song ID from a certain artist
     int songID = await SongID().getSongID(aN);
-    print(songID);
 
     //getting the song title of that songID
     String songTitle = await Album().songAlbum(songID);
@@ -74,7 +71,6 @@ class _ThirdLoadingPageState extends State<ThirdLoadingPage> {
 
     //getting the album of the song extracted
     String albumName = await AlbumSongGetter().albumName(songID);
-    print('albumName = $albumName');
 
     //getting the cleaned album name (removed of parenthesis and/or square brackets and/or dashes)
     String correctAlbumName = await BlankAlbum().getAlbumTitle(albumName);

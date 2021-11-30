@@ -23,6 +23,7 @@ class FirstLoadingPage extends StatefulWidget {
 class _FirstLoadingPageState extends State<FirstLoadingPage> {
   TitleScrambler ts = TitleScrambler();
 
+  //automatically initializes the state and runs the sendToGamePage method
   @override
   void initState() {
     super.initState();
@@ -106,8 +107,12 @@ class _FirstLoadingPageState extends State<FirstLoadingPage> {
 
   //gets the game components such as the title itself and its scrambled version
   Future<ScrambledSongGame> getScrambledGameComponent(String an) async {
+
+    //will get a random song title of specified artist
     String correctTitle = await ts.getSongTitle(an);
     print('correctTitle = $correctTitle');
+
+    //will then scramble that song title
     String scrambledTitle = await ts.scramble(correctTitle);
     print('scrambledTitle = $scrambledTitle');
 

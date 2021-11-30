@@ -197,70 +197,16 @@ class _JeopardyState extends State<Jeopardy> {
   }
 
   void sendToLoadingPage() async {
-    try {
       Navigator.of(context).push(MaterialPageRoute(
           builder: (context) => SecondLoadingPage(
               artistName1: widget.artistName1,
               artistName2: widget.artistName2,
               artistName3: widget.artistName3,
               scoreKeeper: sk)));
-    } catch (e) {
-      print(e);
-      //TODO: make alert dialog that says 'we can't find one of the artists you named, please enter a new one'
-    }
   }
-  //gets the scrambled song titles
-  /*Future<ScrambledSongGame> getScrambledGameComponent(String an) async {
-    String correctTitle = await ts.getSongTitle(an);
-    print('correctTitle = $correctTitle');
-    String scrambledTitle = await ts.Scramble(correctTitle);
-    print('scrambledTitle = $scrambledTitle');
 
-    return ScrambledSongGame(
-        scrambledSongTitle: scrambledTitle, songTitle: correctTitle);
-  }*/
 
-  /*void sendToDoubleJeopardyPage() async {
-    try {
-      ScrambledSongGame ssg1 =
-          await getScrambledGameComponent(widget.artistName1);
-      ScrambledSongGame ssg2 =
-          await getScrambledGameComponent(widget.artistName2);
-      ScrambledSongGame ssg3 =
-          await getScrambledGameComponent(widget.artistName3);
-      ScrambledSongGame ssg4 =
-          await getScrambledGameComponent(widget.artistName1);
-      ScrambledSongGame ssg5 =
-          await getScrambledGameComponent(widget.artistName2);
-      ScrambledSongGame ssg6 =
-          await getScrambledGameComponent(widget.artistName3);
-      ScrambledSongGame ssg7 =
-          await getScrambledGameComponent(widget.artistName1);
-      ScrambledSongGame ssg8 =
-          await getScrambledGameComponent(widget.artistName2);
-      ScrambledSongGame ssg9 =
-          await getScrambledGameComponent(widget.artistName3);
 
-      Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => DoubleJeopardyPage(
-                artistName1: widget.artistName1,
-                artistName2: widget.artistName2,
-                artistName3: widget.artistName3,
-                ssg1: ssg1,
-                ssg2: ssg2,
-                ssg3: ssg3,
-                ssg4: ssg4,
-                ssg5: ssg5,
-                ssg6: ssg6,
-                ssg7: ssg7,
-                ssg8: ssg8,
-                ssg9: ssg9,
-                sk: sk,
-              )));
-    } catch (e) {
-      //TODO: make alert dialog that says 'we can't find one of the artists you named, please enter a new one'
-    }
-  }*/
 
   @override
   Widget build(BuildContext context) {

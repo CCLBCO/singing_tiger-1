@@ -147,7 +147,6 @@ class _P2FinalJeopardyState extends State<P2FinalJeopardy> {
                         print("correct answer is: $correctAnswer");
                         print("game score is: $playerWager");
 
-                        //Navigator.of(pageContext).pop();
                         checkAnswer(
                           usersAnswer: usersAnswer,
                           correctAnswer: correctAnswer,

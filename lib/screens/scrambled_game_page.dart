@@ -197,20 +197,20 @@ class _ScrambledGamePageState extends State<ScrambledGamePage> {
                       onPressed: () {
                         setState(
                           () {
-                            print("user's answer is: $scrambledTitleAnswer");
+                            /*print("user's answer is: $scrambledTitleAnswer");
                             print("correct answer is: $correctAnswer");
                             print("game score is: $gameScore");
                             print("player one's turn?");
                             print(widget.sk.isPlayerOneTurn());
                             print("player two's turn?");
-                            print(widget.sk.isPlayerTwoTurn());
-
+                            print(widget.sk.isPlayerTwoTurn());*/
                             //Navigator.of(pageContext).pop();
                             checkAnswer(
-                                usersAnswer: scrambledTitleAnswer,
-                                correctAnswer: correctAnswer,
-                                gameScore: gameScore,
-                                con: pageContext);
+                              usersAnswer: scrambledTitleAnswer,
+                              correctAnswer: correctAnswer,
+                              gameScore: gameScore,
+                              con: pageContext,
+                            );
                           },
                         );
                       },

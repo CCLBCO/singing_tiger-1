@@ -5,6 +5,7 @@ import '../constants.dart';
 import '../screens/components/input_boxes.dart';
 import '../screens/first_loading_page.dart';
 import '../utilities/string_scrambler.dart';
+
 class InputPage extends StatefulWidget {
   const InputPage({Key? key}) : super(key: key);
 
@@ -25,33 +26,15 @@ class _InputPageState extends State<InputPage> {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
 
-    TitleScrambler ts = TitleScrambler();
-
-    //gets the game components such as the title itself and its scrambled version
-    /*Future<ScrambledSongGame> getScrambledGameComponent(String an) async {
-      String correctTitle = await ts.getSongTitle(an);
-      print('correctTitle = $correctTitle');
-      String scrambledTitle = await ts.Scramble(correctTitle);
-      print('scrambledTitle = $scrambledTitle');
-
-      return ScrambledSongGame(
-          scrambledSongTitle: scrambledTitle, songTitle: correctTitle);
-    }*/
+    //send the the artist names to the loading page where they will be processed
+    // into game components
     void sendToLoadingPage() async {
-      try {
-
-        Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => FirstLoadingPage(
-                  artistName1: artistName1,
-                  artistName2: artistName2,
-                  artistName3: artistName3
-                )));
-      } catch (e) {
-        print(e);
-        //TODO: make alert dialog that says 'we can't find one of the artists you named, please enter a new one'
-      }
+      Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => FirstLoadingPage(
+              artistName1: artistName1,
+              artistName2: artistName2,
+              artistName3: artistName3)));
     }
-
 
     if (artistName1.isNotEmpty &&
         artistName2.isNotEmpty &&
@@ -77,12 +60,13 @@ class _InputPageState extends State<InputPage> {
               Align(
                 alignment: Alignment.topCenter,
                 child: Padding(
+                  //for media query responsiveness
                   padding: EdgeInsets.fromLTRB(
-                      screenWidth / 5,
-                      screenHeight * 3 / 11,
-                      screenWidth / 5,
-                      screenHeight * 2 / 6),
-                  //padding: EdgeInsets.all(10.0),
+                    screenWidth / 5,
+                    screenHeight * 3 / 11,
+                    screenWidth / 5,
+                    screenHeight * 2 / 6,
+                  ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[

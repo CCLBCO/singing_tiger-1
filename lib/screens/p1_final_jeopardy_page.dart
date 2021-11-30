@@ -52,8 +52,6 @@ class _P1FinalJeopardyState extends State<P1FinalJeopardy> {
     if (usersAnswer.toUpperCase().trim() ==
         correctAnswer.toUpperCase().trim()) {
       widget.scoreKeeper.addPlayerOneScore(gameScore);
-      print("P1 WINS! - player one score = " +
-          widget.scoreKeeper.getPlayerOneScore().toString());
       msg = 'PLAYER ONE IS CORRECT!!';
       scoreMsg =
           'YOUR FINAL SCORE IS ${widget.scoreKeeper.getPlayerOneScore()}';
