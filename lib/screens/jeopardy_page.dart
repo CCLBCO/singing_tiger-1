@@ -6,7 +6,7 @@ import '../constants.dart';
 import '../screens/components/per_artist.dart';
 import '../screens/components/score_keeper_area.dart';
 import '../screens/components/custom_alert.dart';
-import '../game_model/scramble_song_title.dart';
+import '../game_model/scramble_song_game.dart';
 import '../screens/scrambled_game_page.dart';
 import '../utilities/score_keeper.dart';
 

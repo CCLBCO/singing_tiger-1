@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_glow/flutter_glow.dart';
-import 'package:singing_tiger_test/game_model/scramble_song_title.dart';
+import 'package:singing_tiger_test/game_model/scramble_song_game.dart';
 import 'package:singing_tiger_test/utilities/string_scrambler.dart';
 import 'components/custom_alert.dart';
 import 'components/loading_screen.dart';

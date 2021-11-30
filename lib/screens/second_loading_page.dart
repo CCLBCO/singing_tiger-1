@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:singing_tiger_test/game_model/scramble_song_title.dart';
+import 'package:singing_tiger_test/game_model/scramble_song_game.dart';
 import 'package:singing_tiger_test/screens/components/loading_screen.dart';
 import 'package:singing_tiger_test/utilities/score_keeper.dart';
 import 'package:singing_tiger_test/utilities/string_scrambler.dart';

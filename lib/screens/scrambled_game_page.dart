@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_glow/flutter_glow.dart';
 import '../constants.dart';
-import '../game_model/scramble_song_title.dart';
+import '../game_model/scramble_song_game.dart';
 import '../utilities/score_keeper.dart';
 import 'components/custom_alert.dart';
 import 'components/input_boxes.dart';
