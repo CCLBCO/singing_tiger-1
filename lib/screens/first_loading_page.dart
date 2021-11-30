@@ -21,6 +21,7 @@ class FirstLoadingPage extends StatefulWidget {
 }
 
 class _FirstLoadingPageState extends State<FirstLoadingPage> {
+  // Object that has methods that scrambles the song titles
   TitleScrambler ts = TitleScrambler();
 
   //automatically initializes the state and runs the sendToGamePage method
@@ -49,6 +50,7 @@ class _FirstLoadingPageState extends State<FirstLoadingPage> {
       ScrambledSongGame ssg8 = await getScrambledGameComponent(artistName2);
       ScrambledSongGame ssg9 = await getScrambledGameComponent(artistName3);
 
+      // Pushes the first jeopardy page with the artist name and game components
       Navigator.of(context).push(MaterialPageRoute(
           builder: (context) => Jeopardy(
                 artistName1: artistName1,
@@ -67,6 +69,7 @@ class _FirstLoadingPageState extends State<FirstLoadingPage> {
     } catch (e) {
       print(e);
 
+      // Show custom error dialog when an error is caught
       _showMyDialog();
     }
   }
@@ -118,6 +121,7 @@ class _FirstLoadingPageState extends State<FirstLoadingPage> {
 
     return ScrambledSongGame(
         scrambledSongTitle: scrambledTitle, songTitle: correctTitle);
+    // Returning a scrambled song component
   }
 
   @override

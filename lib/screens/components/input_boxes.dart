@@ -31,9 +31,7 @@ class InputBoxes extends StatelessWidget {
           //fillColor: Colors.white,
           filled: false,
         ),
-        onChanged: function, /*(inputtedArtist1) {
-                                artistName1 = inputtedArtist1;
-                                },*/
+        onChanged: function,
       ),
     );
   }

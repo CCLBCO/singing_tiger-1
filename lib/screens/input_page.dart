@@ -4,7 +4,6 @@ import 'package:flutter_glow/flutter_glow.dart';
 import '../constants.dart';
 import '../screens/components/input_boxes.dart';
 import '../screens/first_loading_page.dart';
-import '../utilities/string_scrambler.dart';
 
 class InputPage extends StatefulWidget {
   const InputPage({Key? key}) : super(key: key);
@@ -19,6 +18,7 @@ class _InputPageState extends State<InputPage> {
   late String artistName2 = '';
   late String artistName3 = '';
 
+  // Initially null since the input boxes are blank at first
   VoidCallback? button = null;
 
   @override
@@ -26,14 +26,17 @@ class _InputPageState extends State<InputPage> {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
 
-    //send the the artist names to the loading page where they will be processed
-    // into game components
+    //send the the artist names to the loading page where
+    // they will be processed into game components
     void sendToLoadingPage() async {
-      Navigator.of(context).push(MaterialPageRoute(
+      Navigator.of(context).push(
+        MaterialPageRoute(
           builder: (context) => FirstLoadingPage(
               artistName1: artistName1,
               artistName2: artistName2,
-              artistName3: artistName3)));
+              artistName3: artistName3),
+        ),
+      );
     }
 
     if (artistName1.isNotEmpty &&
@@ -75,6 +78,8 @@ class _InputPageState extends State<InputPage> {
                         style: kEnterArtistsTextStyle,
                         textAlign: TextAlign.center,
                       ),
+                      // Input Boxes is a custom-designed widget for the project
+                      // which copies the format from input_boxes.dart
                       InputBoxes(
                         hintText: 'ARTIST 1',
                         function: (inputtedArtist1) {
@@ -117,16 +122,12 @@ class _InputPageState extends State<InputPage> {
                   child: Padding(
                     padding: EdgeInsets.fromLTRB(0, 0, 0, 30.0),
                     child: ElevatedButton(
-                        style: button == null
-                            ? kDisabledNextButtonStyle
-                            : kEnabledNextButtonStyle,
+                        style: kEnabledNextButtonStyle,
                         child: Text(
                           "NEXT",
                           style: kNextButtonTextStyle,
                         ),
                         onPressed: button
-                        // Navigator.of(context).push(MaterialPageRoute(
-                        //     builder: (context) => InputPage()));
                         ),
                   ),
                 ),
